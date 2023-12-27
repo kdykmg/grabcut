@@ -29,6 +29,7 @@ for i in os.listdir(path+'/test_imgs/'):
         h=y2-y1
         Box=[x1,y1,w,h,num,conf]
     rec=(Box[0],Box[1],Box[2],Box[3])
+    
     mask = np.zeros(image.shape[:2], np.uint8)
     bgdModel = np.zeros((1,65), np.float64)
     fgdModel = np.zeros((1,65), np.float64)
@@ -49,8 +50,8 @@ for i in os.listdir(path+'/test_imgs/'):
         re_size=(int(x*w),int(y*w))
     re_image = cv2.resize(image,dsize=re_size)
     base[int(size[1]/2-re_size[1]/2):int(size[1]/2+re_size[1]/2),int(size[0]/2-re_size[0]/2):int(size[0]/2+re_size[0]/2)]=re_image
-    #image=cv2.equalizeHist(base)
+    image=cv2.equalizeHist(base)
     #cv2.imshow('',image)
     #if cv2.waitKey(0) & 0xFF == ord("q"):
     #    continue
-    cv2.imwrite(path+"/grab_cut_imgs/"+i,base)
+    cv2.imwrite(path+"/grab_cut_imgs/"+i,image)
